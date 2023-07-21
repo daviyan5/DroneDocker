@@ -170,8 +170,10 @@ RUN cd ~/catkin_ws/src \
 	&& source ~/catkin_ws/devel/setup.bash \
     && cd
 
+# STEP 20 - Install Kalibr -----------------------------------------------------------
 RUN mkdir ~/kalibr_workspace && cd ~/kalibr_workspace \
     && mkdir src && cd src \
     && git clone https://github.com/ethz-asl/kalibr.git \
-    cd ~/kalibr_workspace/ \
-    && catkin build -DCMAKE_BUILD_TYPE=Release -j4
+    && cd ~/kalibr_workspace/ \
+    && source /opt/ros/${ROS_DISTRO}/setup.bash \
+    && catkin build -DCMAKE_BUILD_TYPE=Release -j8
