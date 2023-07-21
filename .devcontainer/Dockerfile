@@ -10,21 +10,25 @@ RUN cd && apt-get update \
     clang g++ \
     wget unzip \
     curl lsb-release gnupg\
-    libgoogle-glog-dev libgflags-dev \
     libeigen3-dev libmetis5 \
     libsuitesparse-dev \
     python3-catkin-tools \
     python3-pip \
     libavcodec-dev libavformat-dev libavutil-dev \
     libglew-dev libgtk2.0-dev libgtk-3-dev libjpeg-dev libpng-dev libpostproc-dev \
-    libswscale-dev libtbb-dev libtiff5-dev libv4l-dev libxvidcore-dev \
+    libswscale-dev libtiff5-dev libv4l-dev libxvidcore-dev \
     libx264-dev qt5-default zlib1g-dev libgl1 libglvnd-dev pkg-config \
     libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev mesa-utils \
     python2.7-dev python3-dev \
     yasm gfortran libtbb-dev libatlas-base-dev  \
     libprotobuf-dev protobuf-compiler libgoogle-glog-dev libgflags-dev \
-    libgphoto2-dev libeigen3-dev libhdf5-dev doxygen libgmp3-dev liblapack-dev libopenblas-dev \
-    libsuitesparse-dev metis libceres-dev 
+    libgphoto2-dev libhdf5-dev doxygen libgmp3-dev liblapack-dev libopenblas-dev \
+    metis libceres-dev autoconf automake  \
+    libboost-all-dev  \
+    doxygen libopencv-dev \
+    libpoco-dev libblas-dev \
+    python3-scipy \
+    python3-matplotlib ipython3 python3-tk python3-igraph python3-pyx
 
 # # STEP ? - Install GKlib and METIS ------------------------------------------------ WARN - NOT WORKING
 # RUN git clone https://github.com/KarypisLab/GKlib \
@@ -166,3 +170,8 @@ RUN cd ~/catkin_ws/src \
 	&& source ~/catkin_ws/devel/setup.bash \
     && cd
 
+RUN mkdir ~/kalibr_workspace && cd ~/kalibr_workspace \
+    && mkdir src && cd src \
+    && git clone https://github.com/ethz-asl/kalibr.git \
+    cd ~/kalibr_workspace/ \
+    && catkin build -DCMAKE_BUILD_TYPE=Release -j4
