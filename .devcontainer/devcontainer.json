@@ -1,0 +1,33 @@
+{
+    "build": { 
+        "dockerfile": "Dockerfile" 
+    },
+
+    "customizations": {
+        "vscode": {
+            "extensions": [
+				"dbaeumer.vscode-eslint",
+				"mutantdino.resourcemonitor",
+				"ms-vscode.cpptools",
+				"ms-vscode.cpptools-extension-pack",
+				"ms-vscode.cpptools-themes",
+				"ms-vscode.cmake-tools",
+				"ms-azuretools.vscode-docker",
+				"GitHub.copilot",
+				"GitHub.vscode-pull-request-github",
+				"ms-python.isort",
+				"ms-python.python",
+				"jeff-hykin.better-cpp-syntax"
+			]
+        }
+    },
+    "runArgs": [
+        "--net", "host", 
+        "-e", "DISPLAY=${env:DISPLAY}",
+        "-v", "/tmp/.X11-unix:/tmp/.X11-unix",
+        "--privileged"
+     ],
+
+    "initializeCommand": "sh scripts/startupScript.sh", // for linux, to allow GUI. May be dangerous.
+    "forwardPorts": [3000]
+}
