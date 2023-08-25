@@ -17,7 +17,8 @@
 				"GitHub.vscode-pull-request-github",
 				"ms-python.isort",
 				"ms-python.python",
-				"jeff-hykin.better-cpp-syntax"
+				"jeff-hykin.better-cpp-syntax",
+                "ms-iot.vscode-ros"
 			]
         }
     },

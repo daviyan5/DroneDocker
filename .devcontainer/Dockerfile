@@ -177,3 +177,7 @@ RUN mkdir ~/kalibr_workspace && cd ~/kalibr_workspace \
     && cd ~/kalibr_workspace/ \
     && source /opt/ros/${ROS_DISTRO}/setup.bash \
     && catkin build -DCMAKE_BUILD_TYPE=Release -j8
+
+# STEP 21 - Install missing libraries -------------------------------------------------
+RUN apt-get install -y ros-${ROS_DISTRO}-rviz \
+    && ros-{$ROS_DISTRO}-rqt-common-plugins
