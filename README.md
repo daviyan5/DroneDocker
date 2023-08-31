@@ -82,7 +82,7 @@ _O conteúdo apresentado nesse documento só é estritamente válido para máqui
       2. _Caso haja alguma falha no processo de compilação (que, inclusive, é bem longo e pode demorar entre 40min a 2h, especialmente graças aos passos 3, 19 e 20) o Docker salva um cache com o último passo bem sucedido da compilação, então não precisa ter (muito) medo. Se o processo falhar, basta executar o comando "Reopen in Container" novamente e o Docker continuará a compilação de onde parou._
       3. _O processo de compilação, por padrão, é executado com 8 threads (flags -j8 no Dockerfile). Isso é feito para acelerar o processo de compilação, mas pode tornar o host praticamente inutilizável até o fim do build. Se isso acontecer e se for muito incômodo, basta diminuir o número de threads nas flags do Dockerfile para 4 ou 2._
       4. _A imagem compilada tem em torno de 10GB._
-      5. *IMPORTANTE: Após o Build, execute: ```bash docker builder prune``` para eliminar os caches.*
+      5. *IMPORTANTE: Após o Build, execute: ```docker builder prune``` no terminal local do seu PC (fora do container) para eliminar os caches.*
 
 # TODO
 
