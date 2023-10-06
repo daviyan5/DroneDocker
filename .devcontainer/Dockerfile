@@ -179,5 +179,8 @@ RUN mkdir ~/kalibr_workspace && cd ~/kalibr_workspace \
     && catkin build -DCMAKE_BUILD_TYPE=Release -j8
 
 # STEP 21 - Install missing libraries -------------------------------------------------
-RUN apt-get install -y ros-${ROS_DISTRO}-rviz \
-    && ros-{$ROS_DISTRO}-rqt-common-plugins
+RUN apt-get update \
+    && apt-get install -y ros-${ROS_DISTRO}-rviz \
+    ros-${ROS_DISTRO}-rqt-common-plugins \
+    gnome-terminal \
+    && pip install ruamel.yaml tqdm keyboard pandas

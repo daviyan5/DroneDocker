@@ -2,5 +2,5 @@
 .vscode
 ./datasets
 *.bag
-./scripts/odometry_tests/results
-./scripts/odometry_tests/__pycache__
+scripts/odometry_tests/results
+scripts/odometry_tests/__pycache__

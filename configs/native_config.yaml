@@ -1,0 +1,91 @@
+%YAML:1.0
+
+#common parameters
+#support: 1 imu 1 cam; 1 imu 2 cam: 2 cam; 
+imu: 1         
+num_of_cam: 1  
+
+imu_topic: "/mavros/imu/data_raw"
+#imu_topic: "/imu0"
+#image0_topic: "/camera/image_raw"
+image0_topic: "/camera/image_mono"
+image1_topic: "/cam1/image_raw"
+output_path: "~/output"
+cam0_calib: "test_cam.yaml"
+cam1_calib: "cam0_pinhole.yaml"
+image_width: 752
+image_height: 480
+   
+
+# Extrinsic parameter between IMU and Camera.
+estimate_extrinsic: 0   # 0  Have an accurate extrinsic parameters. We will trust the following imu^R_cam, imu^T_cam, don't change it.
+                        # 1  Have an initial guess about extrinsic parameters. We will optimize around your initial guess.
+
+body_T_cam0: !!opencv-matrix
+    rows: 4
+    cols: 4
+    dt: d
+    data:   
+
+          #[-0.02750595,-0.32035174, 0.94689925, 0.10013103,
+          #-0.99954542, 0.0205119, -0.02209572, 0.00278817, 
+          #-0.0123443, -0.94707657, -0.32077032, 0.00679057, 
+          #0,             0,             0,           1]
+          
+          
+          #[-0.04499061, -0.34849706, 0.93622948, 0.11396354,
+          #-0.99896583, 0.02185512, -0.03987018, 0.00797396, 
+          #-0.00656677, -0.93705504, -0.34911993, -0.0032437, 
+          #0,              0,           0,           1]
+
+          #[-0.04934136, -0.34774513, 0.93628989, 0.11492858,
+          #-0.99877494, 0.02069638, -0.04494746, -0.00064505,
+          #-0.00374755, -0.93736065, -0.34834031, 0.00372943,
+          #0,              0,           0,           1]
+          
+          #drone_gs3 acima ||||
+
+            [-0.0797745, -0.27822436, 0.95719759, 0.11224533,
+            -0.9967732, 0.01369142, -0.07909317, -0.0010952,
+            0.00890025, -0.96041853, -0.27841881, 0.00882241,
+             0, 0, 0, 1]
+          #drone_new_focal_lenght calib result acima!! 
+
+
+
+#Multiple thread support
+multiple_thread: 1
+use_gpu: 1
+use_gpu_acc_flow: 0
+
+#feature traker paprameters
+max_cnt: 200            # max feature number in feature tracking
+min_dist: 30            # min distance between two features 
+freq: 10                # frequence (Hz) of publish tracking result. At least 10Hz for good estimation. If set 0, the frequence will be same as raw image 
+F_threshold: 1.0        # ransac threshold (pixel)
+show_track: 0           # publish tracking image as topic
+flow_back: 1            # perform forward and backward optical flow to improve feature tracking accuracy
+
+#optimization parameters
+max_solver_time: 0.04  # max solver itration time (ms), to guarantee real time
+max_num_iterations: 8   # max solver itrations, to guarantee real time
+keyframe_parallax: 10.0 # keyframe selection threshold (pixel)
+
+#imu parameters       The more accurate parameters you provide, the better performance
+acc_n: 0.1          # accelerometer measurement noise standard deviation. 
+gyr_n: 0.01         # gyroscope measurement noise standard deviation.     
+acc_w: 0.001        # accelerometer bias random work noise standard deviation.  
+gyr_w: 0.0001       # gyroscope bias random work noise standard deviation.     
+g_norm: 9.81007     # gravity magnitude
+
+#unsynchronization parameters
+estimate_td: 1                     # online estimate time offset between camera and imu
+td:  -0.010985398763999144 #-0.1716382807995466                             # initial value of time offset. unit: s. readed image clock + td = real image clock (IMU clock)
+
+#rolling shutter parameters
+#rolling_shutter: 1                  # 0: global shutter camera, 1: rolling shutter camera
+#rolling_shutter_tr: 0.33 
+#loop closure parameters
+load_previous_pose_graph: 0        # load and reuse previous pose graph; load from 'pose_graph_save_path'
+pose_graph_save_path: "~/output/pose_graph/" # save and load path
+save_image: 0                   # save image in pose graph for visualization prupose; you can close this function by setting 0 

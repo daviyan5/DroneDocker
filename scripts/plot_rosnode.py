@@ -1,6 +1,7 @@
-# This script reads the odometry quartenion from the vins fusion topic and animates it in a 3D plot
-# It also reads the timestamp from the vins fusion topic and plots the time difference between each message
-# This should be ran before the vins fusion node is started. It will publish a topic for rqt visualization and in the end outputs a video of the animation + image
+
+# VINS PROCESS: vins_node
+# LOOP PROCESS: loop_fusion_node
+
 
 import rospy
 import datetime
@@ -16,7 +17,7 @@ from nav_msgs.msg import Odometry
 from cv_bridge import CvBridge
 
 VINS_POSE_TOPIC  = '/vins_estimator/camera_pose'
-CAMERA_TOPIC     = '/cam0/image_raw'
+CAMERA_TOPIC     = '/camera/image_mono'
 
 class OdometryPlot():
     def __init__(self, ground_truth):

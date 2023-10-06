@@ -1,0 +1,33 @@
+Daemon:
+
+
+	1 - Cria processos de controle:
+		1.1 - Vins Fusion Node, com o daemon.yaml
+		1.2 - Cria um mapa do ambiente, de acordo com certos parâmetros
+	2 - Realiza checagens, via ROS, com um método health_check(), dos tópicos publicados por esses nós, eternamente:
+		2.1 - Se health_check() aceita:
+			Puxa os tópicos publicados pelo vins como "last_trusted_state"
+			Publica-os com um prefixo "daemon_" e com correção de pose (!) 	----> Quais tópicos interessam?
+			Continua
+		2.2 - Senão:
+			Manda o drone parar (!!)					----> Como fazer isso?
+			Para a odometria
+			Publica o last_trusted_state no lugar da odometria 
+			Enquanto o health_check() não aceita:
+				Reinicia o Vins Fusion
+				Realiza o health_check()
+				Publica o last_trusted_state no lugar da odometria
+			Calcula a correção de pose: prev -> atual
+		2.3 - Mapeamento
+			Mapeia o ambiente, de acordo com um mapa interno, e publica	----> Necessário?
+			Aplica correções na trajetória e na posição			----> Compensar erros da odometria
+			
+	health_check():
+		Puxa o histórico de comandos dados ao drone 				----> ROS?
+		Calcula uma posição estimada com base em um erro com base na "ultima 
+		posição confiável"
+		Compara com a posição atual dada pelo vins fusion
+		Se uma discrepância muito absurda é observada, principalmente no eixo z,
+			nao aceita
+		Senão
+			aceita
