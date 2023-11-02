@@ -139,11 +139,11 @@ def main():
         iterations_list, iteration_dict = pickle.load(open(save_state_path, 'rb'))
 
     # Define the grid search
-    thread_list             = [1, 2]
-    cnt_list                = [80, 110, 150, 200]
+    thread_list             = [1]
+    cnt_list                = [80]
     dist_list               = [30]
-    solver_time_list        = [0.02, 0.04, 0.06]
-    num_iterations_list     = [8, 12, 16]
+    solver_time_list        = [0.04]
+    num_iterations_list     = [8]
     loop_list               = [False]
 
     start_index     = iteration_dict['iteration_index']
